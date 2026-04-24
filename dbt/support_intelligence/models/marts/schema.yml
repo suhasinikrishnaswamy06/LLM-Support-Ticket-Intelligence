@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_support_tickets
+    columns:
+      - name: ticket_id
+        tests: [not_null, unique]
+  - name: mart_support_ticket_trends
+    columns:
+      - name: ticket_count
+        tests: [not_null]

@@ -1,0 +1,13 @@
+support_intelligence:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('SUPPORT_INTEL_GCP_PROJECT') }}"
+      dataset: "{{ env_var('SUPPORT_INTEL_ANALYTICS_DATASET', 'support_intelligence_dev') }}"
+      threads: 4
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: "{{ env_var('SUPPORT_INTEL_BQ_LOCATION', 'US') }}"
+      priority: interactive
+      timeout_seconds: 300

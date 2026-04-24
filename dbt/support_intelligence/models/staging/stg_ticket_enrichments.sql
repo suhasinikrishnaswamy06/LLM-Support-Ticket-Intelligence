@@ -1,0 +1,19 @@
+select
+    cast(ticket_id as string) as ticket_id,
+    cast(thread_id as string) as thread_id,
+    cast(slack_channel as string) as slack_channel,
+    cast(customer_name as string) as customer_name,
+    cast(created_at as timestamp) as created_at,
+    cast(message_text as string) as message_text,
+    cast(issue_category as string) as issue_category,
+    cast(sentiment as string) as sentiment,
+    cast(urgency as string) as urgency,
+    cast(product_area as string) as product_area,
+    cast(summary as string) as summary,
+    cast(confidence as float64) as confidence,
+    cast(model_name as string) as model_name,
+    cast(prompt_version as string) as prompt_version,
+    cast(enrichment_method as string) as enrichment_method,
+    cast(processed_at as timestamp) as processed_at,
+    cast(raw_response as string) as raw_response
+from {{ source('support_raw', 'ticket_enrichments') }}

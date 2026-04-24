@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: support_raw
+    database: "{{ env_var('SUPPORT_INTEL_GCP_PROJECT', 'your-gcp-project') }}"
+    schema: "{{ env_var('SUPPORT_INTEL_RAW_DATASET', 'support_raw') }}"
+    tables:
+      - name: support_tickets
+      - name: ticket_enrichments
