@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
+import json
 import os
 import shutil
 import subprocess
@@ -9,12 +11,15 @@ import sys
 import pandas as pd
 from google.cloud import bigquery
 
-from src.enrichment.ticket_enricher import enrichment_to_dict
+from src.enrichment.ticket_enricher import TicketEnrichmentError, enrichment_to_dict
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+ENRICHMENTS_PATH = PROCESSED_DIR / "ticket_enrichments.csv"
+FAILURES_PATH = PROCESSED_DIR / "ticket_enrichment_failures.csv"
+RUN_SUMMARY_PATH = PROCESSED_DIR / "ticket_enrichment_run_summary.json"
 
 
 def generate_source_data() -> None:
@@ -31,21 +36,55 @@ def validate_raw_files() -> None:
 def enrich_support_tickets() -> None:
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     tickets_df = pd.read_csv(RAW_DIR / "support_tickets.csv")
-    enriched_rows = []
+    enriched_rows: list[dict[str, object]] = []
+    failed_rows: list[dict[str, object]] = []
+    prompt_version = os.environ.get("SUPPORT_INTEL_PROMPT_VERSION", "v1")
+    model_name = os.environ.get("OPENAI_MODEL", "gpt-4.1-mini")
+
     for row in tickets_df.to_dict(orient="records"):
-        enrichment = enrichment_to_dict(row["message_text"])
-        enriched_rows.append(
-            {
-                "ticket_id": row["ticket_id"],
-                "thread_id": row["thread_id"],
-                "slack_channel": row["slack_channel"],
-                "customer_name": row["customer_name"],
-                "created_at": row["created_at"],
-                "message_text": row["message_text"],
-                **enrichment,
-            }
-        )
-    pd.DataFrame(enriched_rows).to_csv(PROCESSED_DIR / "ticket_enrichments.csv", index=False)
+        try:
+            enrichment = enrichment_to_dict(row["message_text"], prompt_version=prompt_version)
+            enriched_rows.append(
+                {
+                    "ticket_id": row["ticket_id"],
+                    "thread_id": row["thread_id"],
+                    "slack_channel": row["slack_channel"],
+                    "customer_name": row["customer_name"],
+                    "created_at": row["created_at"],
+                    "message_text": row["message_text"],
+                    **enrichment,
+                }
+            )
+        except TicketEnrichmentError as exc:
+            failed_rows.append(
+                {
+                    "ticket_id": row["ticket_id"],
+                    "thread_id": row["thread_id"],
+                    "slack_channel": row["slack_channel"],
+                    "customer_name": row["customer_name"],
+                    "created_at": row["created_at"],
+                    "message_text": row["message_text"],
+                    "failure_type": type(exc).__name__,
+                    "failure_reason": str(exc),
+                    "model_name": model_name,
+                    "prompt_version": prompt_version,
+                    "failed_at": datetime.now(timezone.utc).isoformat(),
+                }
+            )
+
+    pd.DataFrame(enriched_rows).to_csv(ENRICHMENTS_PATH, index=False)
+    pd.DataFrame(failed_rows).to_csv(FAILURES_PATH, index=False)
+
+    run_summary = {
+        "run_completed_at": datetime.now(timezone.utc).isoformat(),
+        "source_ticket_count": int(len(tickets_df)),
+        "successful_enrichment_count": int(len(enriched_rows)),
+        "failed_enrichment_count": int(len(failed_rows)),
+        "success_rate": round(len(enriched_rows) / len(tickets_df), 4) if len(tickets_df) else 0,
+        "model_name": model_name,
+        "prompt_version": prompt_version,
+    }
+    RUN_SUMMARY_PATH.write_text(json.dumps(run_summary, indent=2), encoding="utf-8")
 
 
 def ensure_bigquery_dataset(project_id: str, dataset_name: str, location: str = "US") -> None:
@@ -56,7 +95,13 @@ def ensure_bigquery_dataset(project_id: str, dataset_name: str, location: str = 
     client.create_dataset(dataset, exists_ok=True)
 
 
-def load_csv_to_bigquery(project_id: str, dataset_name: str, table_name: str, csv_path: Path, location: str = "US") -> None:
+def load_csv_to_bigquery(
+    project_id: str,
+    dataset_name: str,
+    table_name: str,
+    csv_path: Path,
+    location: str = "US",
+) -> None:
     client = bigquery.Client(project=project_id)
     table_id = f"{project_id}.{dataset_name}.{table_name}"
     job_config = bigquery.LoadJobConfig(
@@ -72,7 +117,9 @@ def load_csv_to_bigquery(project_id: str, dataset_name: str, table_name: str, cs
 
 def load_raw_tables(project_id: str, dataset_name: str, location: str = "US") -> None:
     load_csv_to_bigquery(project_id, dataset_name, "support_tickets", RAW_DIR / "support_tickets.csv", location)
-    load_csv_to_bigquery(project_id, dataset_name, "ticket_enrichments", PROCESSED_DIR / "ticket_enrichments.csv", location)
+    load_csv_to_bigquery(project_id, dataset_name, "ticket_enrichments", ENRICHMENTS_PATH, location)
+    if FAILURES_PATH.exists() and FAILURES_PATH.stat().st_size > 0:
+        load_csv_to_bigquery(project_id, dataset_name, "ticket_enrichment_failures", FAILURES_PATH, location)
 
 
 def run_dbt_build(project_dir: Path | None = None, profiles_dir: Path | None = None) -> None:

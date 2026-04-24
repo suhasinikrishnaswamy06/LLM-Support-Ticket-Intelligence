@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # LLM-Driven Support Ticket Intelligence Pipeline
 
 This project is a portfolio-ready data pipeline that ingests support tickets, enriches unstructured messages into structured support signals, and models analytics-ready outputs for support trend analysis.
@@ -16,6 +15,7 @@ This project is a portfolio-ready data pipeline that ingests support tickets, en
 - generate mock Slack-style support tickets
 - enrich ticket text with issue category, sentiment, urgency, product area, summary, and confidence
 - persist raw and enriched records for warehouse loading
+- capture failed enrichments for auditability and replay
 - model analytics-ready support marts in dbt
 - orchestrate the workflow in Airflow
 
@@ -23,7 +23,7 @@ This project is a portfolio-ready data pipeline that ingests support tickets, en
 
 - `airflow/dags/`: orchestration DAG
 - `data/raw/`: generated raw support tickets
-- `data/processed/`: enrichment outputs
+- `data/processed/`: enrichment outputs, failure outputs, and run summaries
 - `dbt/support_intelligence/`: staging and mart models
 - `src/data/`: mock ticket generation
 - `src/enrichment/`: LLM and fallback enrichment logic
@@ -51,10 +51,18 @@ python -c "from src.orchestration.pipeline import enrich_support_tickets; enrich
 dbt build --project-dir dbt/support_intelligence --profiles-dir dbt_profiles
 ```
 
-## Notes
+## Reliability Features
 
-- The repo includes a deterministic fallback enricher so the pipeline still runs without an API key.
-- Install Airflow separately with the official constraints file on Python 3.11:
+- deterministic fallback enrichment when no API key is available
+- validation for required keys, accepted values, non-empty summary, and confidence range
+- automatic retry handling for LLM API enrichment attempts
+- failed-record capture in `data/processed/ticket_enrichment_failures.csv`
+- run-level audit summary in `data/processed/ticket_enrichment_run_summary.json`
+- model and prompt version tracking in enrichment outputs
+
+## Airflow Install
+
+Install Airflow separately with the official constraints file on Python 3.11:
 
 ```powershell
 python -m pip install --upgrade pip
@@ -62,7 +70,8 @@ pip install -r requirements.txt
 pip install "apache-airflow==2.10.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.0/constraints-3.11.txt"
 ```
 
-- The next upgrade is to replace the simple fallback with strict JSON-schema LLM responses plus retry and dead-letter handling.
-=======
-# LLM-Driven-Support-Ticket-
->>>>>>> 518620ac59ee2cc61e49ba203c4aaed773f16c66
+## Next Steps
+
+- add replay automation for failed rows
+- add downstream marts for support SLA and incident trend reporting
+- optionally switch from mock data to Slack API ingestion
