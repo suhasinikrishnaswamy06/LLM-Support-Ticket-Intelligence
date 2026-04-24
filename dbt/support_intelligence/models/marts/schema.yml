@@ -9,3 +9,7 @@ models:
     columns:
       - name: ticket_count
         tests: [not_null]
+  - name: mart_ticket_enrichment_failures
+    columns:
+      - name: failed_ticket_count
+        tests: [not_null]

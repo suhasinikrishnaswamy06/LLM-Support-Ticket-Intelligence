@@ -59,6 +59,7 @@ dbt build --project-dir dbt/support_intelligence --profiles-dir dbt_profiles
 - failed-record capture in `data/processed/ticket_enrichment_failures.csv`
 - run-level audit summary in `data/processed/ticket_enrichment_run_summary.json`
 - model and prompt version tracking in enrichment outputs
+- dbt failure-monitoring mart for failure counts by day, type, channel, model, and prompt version
 
 ## Airflow Install
 

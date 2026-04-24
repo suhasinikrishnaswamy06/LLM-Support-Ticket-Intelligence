@@ -7,3 +7,4 @@ sources:
     tables:
       - name: support_tickets
       - name: ticket_enrichments
+      - name: ticket_enrichment_failures

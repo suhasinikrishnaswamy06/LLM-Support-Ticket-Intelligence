@@ -21,3 +21,11 @@ models:
         tests:
           - accepted_values:
               values: ['low', 'medium', 'high', 'critical']
+  - name: stg_ticket_enrichment_failures
+    columns:
+      - name: ticket_id
+        tests: [not_null]
+      - name: failure_type
+        tests: [not_null]
+      - name: failed_at
+        tests: [not_null]
