@@ -1,81 +1,81 @@
 ticket_id,thread_id,slack_channel,customer_name,created_at,message_text,expected_product_area,expected_urgency,expected_sentiment
-TCKT-0001,thread-19,support-platform,BrightPath AI,2026-04-16T01:46:48.203048+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0002,thread-17,support-enterprise,Acme Health,2026-04-23T11:07:48.203048+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0003,thread-35,support-auth,Maple Bank,2026-04-21T23:10:48.203048+00:00,[Maple Bank] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0004,thread-14,support-platform,Acme Health,2026-04-23T04:30:48.203048+00:00,[Acme Health] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0005,thread-27,support-platform,Maple Bank,2026-04-15T06:20:48.203048+00:00,[Maple Bank] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0006,thread-19,support-enterprise,Acme Health,2026-04-18T21:58:48.203048+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0007,thread-30,support-platform,Orbit Logistics,2026-04-19T06:11:48.203048+00:00,[Orbit Logistics] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0008,thread-10,support-enterprise,BrightPath AI,2026-04-15T23:33:48.203048+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0009,thread-11,support-enterprise,BrightPath AI,2026-04-18T14:02:48.203048+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0010,thread-37,support-enterprise,Acme Health,2026-04-18T11:16:48.203048+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0011,thread-40,support-platform,Northstar Retail,2026-04-23T10:30:48.203048+00:00,[Northstar Retail] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0012,thread-35,support-auth,Acme Health,2026-04-24T01:48:48.203048+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0013,thread-27,support-platform,Maple Bank,2026-04-16T16:27:48.203048+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0014,thread-20,support-platform,BrightPath AI,2026-04-17T15:46:48.203048+00:00,[BrightPath AI] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0015,thread-28,support-auth,Maple Bank,2026-04-23T15:07:48.203048+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0016,thread-10,support-enterprise,BrightPath AI,2026-04-24T14:02:48.203048+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0017,thread-33,support-platform,Acme Health,2026-04-19T14:25:48.203048+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0018,thread-10,support-platform,Orbit Logistics,2026-04-21T22:01:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0019,thread-36,support-enterprise,Maple Bank,2026-04-19T11:19:48.203048+00:00,[Maple Bank] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0020,thread-31,support-billing,Northstar Retail,2026-04-22T13:49:48.203048+00:00,[Northstar Retail] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0021,thread-19,support-auth,Maple Bank,2026-04-24T03:12:48.203048+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0022,thread-12,support-auth,Orbit Logistics,2026-04-24T03:55:48.203048+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0023,thread-12,support-billing,Orbit Logistics,2026-04-17T15:40:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0024,thread-28,support-platform,BrightPath AI,2026-04-22T06:31:48.203048+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0025,thread-28,support-enterprise,Orbit Logistics,2026-04-24T03:19:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0026,thread-26,support-enterprise,Orbit Logistics,2026-04-22T07:30:48.203048+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0027,thread-17,support-enterprise,Northstar Retail,2026-04-19T18:17:48.203048+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0028,thread-29,support-billing,BrightPath AI,2026-04-15T22:53:48.203048+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0029,thread-40,support-platform,BrightPath AI,2026-04-24T02:08:48.203048+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0030,thread-15,support-platform,BrightPath AI,2026-04-18T03:45:48.203048+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0031,thread-28,support-billing,Orbit Logistics,2026-04-20T00:43:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0032,thread-40,support-platform,Northstar Retail,2026-04-19T03:05:48.203048+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0033,thread-14,support-enterprise,Maple Bank,2026-04-19T17:37:48.203048+00:00,[Maple Bank] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0034,thread-15,support-billing,BrightPath AI,2026-04-24T12:47:48.203048+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0035,thread-16,support-billing,BrightPath AI,2026-04-21T01:17:48.203048+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0036,thread-10,support-billing,Acme Health,2026-04-23T14:32:48.203048+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0037,thread-29,support-platform,BrightPath AI,2026-04-17T02:08:48.203048+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0038,thread-24,support-platform,Acme Health,2026-04-16T08:07:48.203048+00:00,[Acme Health] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0039,thread-23,support-billing,Acme Health,2026-04-15T14:40:48.203048+00:00,[Acme Health] Customer says they were double charged after upgrading seats.,billing,high,negative
-TCKT-0040,thread-18,support-auth,BrightPath AI,2026-04-22T15:31:48.203048+00:00,[BrightPath AI] Customer says they were double charged after upgrading seats.,billing,high,negative
-TCKT-0041,thread-22,support-billing,Orbit Logistics,2026-04-18T20:28:48.203048+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0042,thread-30,support-auth,Acme Health,2026-04-23T19:17:48.203048+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0043,thread-14,support-platform,BrightPath AI,2026-04-21T05:58:48.203048+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0044,thread-13,support-auth,Orbit Logistics,2026-04-15T21:47:48.203048+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0045,thread-19,support-platform,Orbit Logistics,2026-04-23T21:22:48.203048+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0046,thread-26,support-platform,Northstar Retail,2026-04-20T18:57:48.203048+00:00,[Northstar Retail] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0047,thread-26,support-enterprise,Orbit Logistics,2026-04-23T18:38:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0048,thread-15,support-auth,Northstar Retail,2026-04-17T14:30:48.203048+00:00,[Northstar Retail] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0049,thread-40,support-enterprise,BrightPath AI,2026-04-16T02:10:48.203048+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0050,thread-38,support-platform,Northstar Retail,2026-04-18T02:50:48.203048+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0051,thread-27,support-enterprise,BrightPath AI,2026-04-20T02:30:48.203048+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0052,thread-18,support-platform,Orbit Logistics,2026-04-21T14:50:48.203048+00:00,[Orbit Logistics] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0053,thread-20,support-enterprise,Acme Health,2026-04-24T14:25:48.203048+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0054,thread-22,support-platform,Maple Bank,2026-04-20T02:00:48.203048+00:00,[Maple Bank] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0055,thread-12,support-auth,BrightPath AI,2026-04-23T21:06:48.203048+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0056,thread-20,support-platform,Orbit Logistics,2026-04-14T23:17:48.203048+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0057,thread-22,support-auth,BrightPath AI,2026-04-16T17:48:48.203048+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0058,thread-17,support-platform,BrightPath AI,2026-04-20T00:59:48.203048+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0059,thread-36,support-enterprise,BrightPath AI,2026-04-18T20:10:48.203048+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0060,thread-22,support-platform,BrightPath AI,2026-04-21T19:00:48.203048+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0061,thread-28,support-billing,Maple Bank,2026-04-24T13:03:48.203048+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0062,thread-22,support-enterprise,Orbit Logistics,2026-04-17T11:24:48.203048+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0063,thread-38,support-platform,Orbit Logistics,2026-04-17T07:46:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0064,thread-37,support-auth,Northstar Retail,2026-04-22T09:53:48.203048+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0065,thread-12,support-enterprise,Orbit Logistics,2026-04-22T05:17:48.203048+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0066,thread-35,support-platform,Maple Bank,2026-04-20T21:19:48.203048+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0067,thread-14,support-platform,Acme Health,2026-04-16T19:37:48.203048+00:00,[Acme Health] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0068,thread-31,support-enterprise,Northstar Retail,2026-04-16T11:40:48.203048+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0069,thread-20,support-enterprise,Northstar Retail,2026-04-19T11:44:48.203048+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
-TCKT-0070,thread-10,support-enterprise,Orbit Logistics,2026-04-15T12:54:48.203048+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
-TCKT-0071,thread-13,support-platform,Orbit Logistics,2026-04-20T07:10:48.203048+00:00,[Orbit Logistics] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0072,thread-14,support-platform,Orbit Logistics,2026-04-24T08:49:48.203048+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0073,thread-37,support-billing,Acme Health,2026-04-21T22:56:48.203048+00:00,[Acme Health] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
-TCKT-0074,thread-38,support-auth,Acme Health,2026-04-20T00:02:48.203048+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0075,thread-26,support-auth,Orbit Logistics,2026-04-18T23:46:48.203048+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
-TCKT-0076,thread-32,support-auth,Acme Health,2026-04-16T09:24:48.203048+00:00,[Acme Health] Customer says they were double charged after upgrading seats.,billing,high,negative
-TCKT-0077,thread-19,support-auth,BrightPath AI,2026-04-17T04:02:48.203048+00:00,[BrightPath AI] SSO login is failing for all Okta users since this morning.,authentication,high,negative
-TCKT-0078,thread-13,support-billing,Maple Bank,2026-04-22T09:16:48.203048+00:00,[Maple Bank] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
-TCKT-0079,thread-20,support-enterprise,Orbit Logistics,2026-04-20T16:35:48.203048+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
-TCKT-0080,thread-35,support-billing,Maple Bank,2026-04-22T08:05:48.203048+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0001,thread-19,support-platform,BrightPath AI,2026-04-16T02:04:53.835625+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0002,thread-17,support-enterprise,Acme Health,2026-04-23T11:25:53.835625+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0003,thread-35,support-auth,Maple Bank,2026-04-21T23:28:53.835625+00:00,[Maple Bank] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0004,thread-14,support-platform,Acme Health,2026-04-23T04:48:53.835625+00:00,[Acme Health] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0005,thread-27,support-platform,Maple Bank,2026-04-15T06:38:53.835625+00:00,[Maple Bank] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0006,thread-19,support-enterprise,Acme Health,2026-04-18T22:16:53.835625+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0007,thread-30,support-platform,Orbit Logistics,2026-04-19T06:29:53.835625+00:00,[Orbit Logistics] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0008,thread-10,support-enterprise,BrightPath AI,2026-04-15T23:51:53.835625+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0009,thread-11,support-enterprise,BrightPath AI,2026-04-18T14:20:53.835625+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0010,thread-37,support-enterprise,Acme Health,2026-04-18T11:34:53.835625+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0011,thread-40,support-platform,Northstar Retail,2026-04-23T10:48:53.835625+00:00,[Northstar Retail] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0012,thread-35,support-auth,Acme Health,2026-04-24T02:06:53.835625+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0013,thread-27,support-platform,Maple Bank,2026-04-16T16:45:53.835625+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0014,thread-20,support-platform,BrightPath AI,2026-04-17T16:04:53.835625+00:00,[BrightPath AI] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0015,thread-28,support-auth,Maple Bank,2026-04-23T15:25:53.835625+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0016,thread-10,support-enterprise,BrightPath AI,2026-04-24T14:20:53.835625+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0017,thread-33,support-platform,Acme Health,2026-04-19T14:43:53.835625+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0018,thread-10,support-platform,Orbit Logistics,2026-04-21T22:19:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0019,thread-36,support-enterprise,Maple Bank,2026-04-19T11:37:53.835625+00:00,[Maple Bank] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0020,thread-31,support-billing,Northstar Retail,2026-04-22T14:07:53.835625+00:00,[Northstar Retail] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0021,thread-19,support-auth,Maple Bank,2026-04-24T03:30:53.835625+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0022,thread-12,support-auth,Orbit Logistics,2026-04-24T04:13:53.835625+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0023,thread-12,support-billing,Orbit Logistics,2026-04-17T15:58:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0024,thread-28,support-platform,BrightPath AI,2026-04-22T06:49:53.835625+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0025,thread-28,support-enterprise,Orbit Logistics,2026-04-24T03:37:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0026,thread-26,support-enterprise,Orbit Logistics,2026-04-22T07:48:53.835625+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0027,thread-17,support-enterprise,Northstar Retail,2026-04-19T18:35:53.835625+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0028,thread-29,support-billing,BrightPath AI,2026-04-15T23:11:53.835625+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0029,thread-40,support-platform,BrightPath AI,2026-04-24T02:26:53.835625+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0030,thread-15,support-platform,BrightPath AI,2026-04-18T04:03:53.835625+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0031,thread-28,support-billing,Orbit Logistics,2026-04-20T01:01:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0032,thread-40,support-platform,Northstar Retail,2026-04-19T03:23:53.835625+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0033,thread-14,support-enterprise,Maple Bank,2026-04-19T17:55:53.835625+00:00,[Maple Bank] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0034,thread-15,support-billing,BrightPath AI,2026-04-24T13:05:53.835625+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0035,thread-16,support-billing,BrightPath AI,2026-04-21T01:35:53.835625+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0036,thread-10,support-billing,Acme Health,2026-04-23T14:50:53.835625+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0037,thread-29,support-platform,BrightPath AI,2026-04-17T02:26:53.835625+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0038,thread-24,support-platform,Acme Health,2026-04-16T08:25:53.835625+00:00,[Acme Health] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0039,thread-23,support-billing,Acme Health,2026-04-15T14:58:53.835625+00:00,[Acme Health] Customer says they were double charged after upgrading seats.,billing,high,negative
+TCKT-0040,thread-18,support-auth,BrightPath AI,2026-04-22T15:49:53.835625+00:00,[BrightPath AI] Customer says they were double charged after upgrading seats.,billing,high,negative
+TCKT-0041,thread-22,support-billing,Orbit Logistics,2026-04-18T20:46:53.835625+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0042,thread-30,support-auth,Acme Health,2026-04-23T19:35:53.835625+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0043,thread-14,support-platform,BrightPath AI,2026-04-21T06:16:53.835625+00:00,[BrightPath AI] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0044,thread-13,support-auth,Orbit Logistics,2026-04-15T22:05:53.835625+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0045,thread-19,support-platform,Orbit Logistics,2026-04-23T21:40:53.835625+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0046,thread-26,support-platform,Northstar Retail,2026-04-20T19:15:53.835625+00:00,[Northstar Retail] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0047,thread-26,support-enterprise,Orbit Logistics,2026-04-23T18:56:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0048,thread-15,support-auth,Northstar Retail,2026-04-17T14:48:53.835625+00:00,[Northstar Retail] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0049,thread-40,support-enterprise,BrightPath AI,2026-04-16T02:28:53.835625+00:00,[BrightPath AI] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0050,thread-38,support-platform,Northstar Retail,2026-04-18T03:08:53.835625+00:00,[Northstar Retail] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0051,thread-27,support-enterprise,BrightPath AI,2026-04-20T02:48:53.835625+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0052,thread-18,support-platform,Orbit Logistics,2026-04-21T15:08:53.835625+00:00,[Orbit Logistics] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0053,thread-20,support-enterprise,Acme Health,2026-04-24T14:43:53.835625+00:00,[Acme Health] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0054,thread-22,support-platform,Maple Bank,2026-04-20T02:18:53.835625+00:00,[Maple Bank] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0055,thread-12,support-auth,BrightPath AI,2026-04-23T21:24:53.835625+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0056,thread-20,support-platform,Orbit Logistics,2026-04-14T23:35:53.835625+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0057,thread-22,support-auth,BrightPath AI,2026-04-16T18:06:53.835625+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0058,thread-17,support-platform,BrightPath AI,2026-04-20T01:17:53.835625+00:00,[BrightPath AI] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0059,thread-36,support-enterprise,BrightPath AI,2026-04-18T20:28:53.835625+00:00,[BrightPath AI] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0060,thread-22,support-platform,BrightPath AI,2026-04-21T19:18:53.835625+00:00,[BrightPath AI] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0061,thread-28,support-billing,Maple Bank,2026-04-24T13:21:53.835625+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0062,thread-22,support-enterprise,Orbit Logistics,2026-04-17T11:42:53.835625+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0063,thread-38,support-platform,Orbit Logistics,2026-04-17T08:04:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0064,thread-37,support-auth,Northstar Retail,2026-04-22T10:11:53.835625+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0065,thread-12,support-enterprise,Orbit Logistics,2026-04-22T05:35:53.835625+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0066,thread-35,support-platform,Maple Bank,2026-04-20T21:37:53.835625+00:00,[Maple Bank] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0067,thread-14,support-platform,Acme Health,2026-04-16T19:55:53.835625+00:00,[Acme Health] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0068,thread-31,support-enterprise,Northstar Retail,2026-04-16T11:58:53.835625+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0069,thread-20,support-enterprise,Northstar Retail,2026-04-19T12:02:53.835625+00:00,[Northstar Retail] Production webhook deliveries are failing across multiple tenants.,api,critical,negative
+TCKT-0070,thread-10,support-enterprise,Orbit Logistics,2026-04-15T13:12:53.835625+00:00,[Orbit Logistics] The dashboard export button is slow but eventually completes.,dashboard,low,neutral
+TCKT-0071,thread-13,support-platform,Orbit Logistics,2026-04-20T07:28:53.835625+00:00,[Orbit Logistics] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0072,thread-14,support-platform,Orbit Logistics,2026-04-24T09:07:53.835625+00:00,[Orbit Logistics] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0073,thread-37,support-billing,Acme Health,2026-04-21T23:14:53.835625+00:00,[Acme Health] API requests are timing out intermittently on the create-ticket endpoint.,api,medium,neutral
+TCKT-0074,thread-38,support-auth,Acme Health,2026-04-20T00:20:53.835625+00:00,[Acme Health] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0075,thread-26,support-auth,Orbit Logistics,2026-04-19T00:04:53.835625+00:00,[Orbit Logistics] Slack alerts stopped posting to the incident channel after reconnect.,integrations,medium,negative
+TCKT-0076,thread-32,support-auth,Acme Health,2026-04-16T09:42:53.835625+00:00,[Acme Health] Customer says they were double charged after upgrading seats.,billing,high,negative
+TCKT-0077,thread-19,support-auth,BrightPath AI,2026-04-17T04:20:53.835625+00:00,[BrightPath AI] SSO login is failing for all Okta users since this morning.,authentication,high,negative
+TCKT-0078,thread-13,support-billing,Maple Bank,2026-04-22T09:34:53.835625+00:00,[Maple Bank] Password reset emails are delayed by more than thirty minutes.,authentication,medium,negative
+TCKT-0079,thread-20,support-enterprise,Orbit Logistics,2026-04-20T16:53:53.835625+00:00,[Orbit Logistics] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
+TCKT-0080,thread-35,support-billing,Maple Bank,2026-04-22T08:23:53.835625+00:00,[Maple Bank] Customer confirmed the refund appeared and thanked the support team.,billing,low,positive
