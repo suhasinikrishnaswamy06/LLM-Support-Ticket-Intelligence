@@ -57,9 +57,24 @@ dbt build --project-dir dbt/support_intelligence --profiles-dir dbt_profiles
 - validation for required keys, accepted values, non-empty summary, and confidence range
 - automatic retry handling for LLM API enrichment attempts
 - failed-record capture in `data/processed/ticket_enrichment_failures.csv`
+- replay utility for failed rows with summary output in `data/processed/ticket_enrichment_replay_summary.json`
 - run-level audit summary in `data/processed/ticket_enrichment_run_summary.json`
 - model and prompt version tracking in enrichment outputs
 - dbt failure-monitoring mart for failure counts by day, type, channel, model, and prompt version
+
+## Replay Failed Rows
+
+Replay all currently failed rows:
+
+```powershell
+python -m src.orchestration.replay_failed_rows
+```
+
+Replay only the first 25 failed rows:
+
+```powershell
+python -m src.orchestration.replay_failed_rows --limit 25
+```
 
 ## Airflow Install
 

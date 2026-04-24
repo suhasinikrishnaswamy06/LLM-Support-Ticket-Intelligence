@@ -9,6 +9,7 @@ import subprocess
 import sys
 
 import pandas as pd
+from pandas.errors import EmptyDataError
 from google.cloud import bigquery
 
 from src.enrichment.ticket_enricher import TicketEnrichmentError, enrichment_to_dict
@@ -20,6 +21,42 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 ENRICHMENTS_PATH = PROCESSED_DIR / "ticket_enrichments.csv"
 FAILURES_PATH = PROCESSED_DIR / "ticket_enrichment_failures.csv"
 RUN_SUMMARY_PATH = PROCESSED_DIR / "ticket_enrichment_run_summary.json"
+REPLAY_SUMMARY_PATH = PROCESSED_DIR / "ticket_enrichment_replay_summary.json"
+
+ENRICHMENT_COLUMNS = [
+    "ticket_id",
+    "thread_id",
+    "slack_channel",
+    "customer_name",
+    "created_at",
+    "message_text",
+    "issue_category",
+    "sentiment",
+    "urgency",
+    "product_area",
+    "summary",
+    "confidence",
+    "model_name",
+    "prompt_version",
+    "enrichment_method",
+    "processed_at",
+    "attempt_count",
+    "raw_response",
+]
+
+FAILURE_COLUMNS = [
+    "ticket_id",
+    "thread_id",
+    "slack_channel",
+    "customer_name",
+    "created_at",
+    "message_text",
+    "failure_type",
+    "failure_reason",
+    "model_name",
+    "prompt_version",
+    "failed_at",
+]
 
 
 def generate_source_data() -> None:
@@ -33,6 +70,58 @@ def validate_raw_files() -> None:
         raise FileNotFoundError(f"Missing required raw files: {missing}")
 
 
+def _read_csv_or_empty(path: Path, columns: list[str]) -> pd.DataFrame:
+    if not path.exists() or path.stat().st_size <= 2:
+        return pd.DataFrame(columns=columns)
+    try:
+        return pd.read_csv(path)
+    except EmptyDataError:
+        return pd.DataFrame(columns=columns)
+
+
+def _write_dataframe(path: Path, rows: list[dict[str, object]], columns: list[str]) -> None:
+    dataframe = pd.DataFrame(rows)
+    if dataframe.empty:
+        dataframe = pd.DataFrame(columns=columns)
+    else:
+        dataframe = dataframe.reindex(columns=columns)
+    dataframe.to_csv(path, index=False)
+
+
+def _build_success_row(row: dict[str, object], prompt_version: str) -> dict[str, object]:
+    enrichment = enrichment_to_dict(str(row["message_text"]), prompt_version=prompt_version)
+    return {
+        "ticket_id": row["ticket_id"],
+        "thread_id": row["thread_id"],
+        "slack_channel": row["slack_channel"],
+        "customer_name": row["customer_name"],
+        "created_at": row["created_at"],
+        "message_text": row["message_text"],
+        **enrichment,
+    }
+
+
+def _build_failure_row(
+    row: dict[str, object],
+    exc: Exception,
+    model_name: str,
+    prompt_version: str,
+) -> dict[str, object]:
+    return {
+        "ticket_id": row["ticket_id"],
+        "thread_id": row["thread_id"],
+        "slack_channel": row["slack_channel"],
+        "customer_name": row["customer_name"],
+        "created_at": row["created_at"],
+        "message_text": row["message_text"],
+        "failure_type": type(exc).__name__,
+        "failure_reason": str(exc),
+        "model_name": model_name,
+        "prompt_version": prompt_version,
+        "failed_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 def enrich_support_tickets() -> None:
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     tickets_df = pd.read_csv(RAW_DIR / "support_tickets.csv")
@@ -43,37 +132,12 @@ def enrich_support_tickets() -> None:
 
     for row in tickets_df.to_dict(orient="records"):
         try:
-            enrichment = enrichment_to_dict(row["message_text"], prompt_version=prompt_version)
-            enriched_rows.append(
-                {
-                    "ticket_id": row["ticket_id"],
-                    "thread_id": row["thread_id"],
-                    "slack_channel": row["slack_channel"],
-                    "customer_name": row["customer_name"],
-                    "created_at": row["created_at"],
-                    "message_text": row["message_text"],
-                    **enrichment,
-                }
-            )
+            enriched_rows.append(_build_success_row(row, prompt_version=prompt_version))
         except TicketEnrichmentError as exc:
-            failed_rows.append(
-                {
-                    "ticket_id": row["ticket_id"],
-                    "thread_id": row["thread_id"],
-                    "slack_channel": row["slack_channel"],
-                    "customer_name": row["customer_name"],
-                    "created_at": row["created_at"],
-                    "message_text": row["message_text"],
-                    "failure_type": type(exc).__name__,
-                    "failure_reason": str(exc),
-                    "model_name": model_name,
-                    "prompt_version": prompt_version,
-                    "failed_at": datetime.now(timezone.utc).isoformat(),
-                }
-            )
+            failed_rows.append(_build_failure_row(row, exc, model_name=model_name, prompt_version=prompt_version))
 
-    pd.DataFrame(enriched_rows).to_csv(ENRICHMENTS_PATH, index=False)
-    pd.DataFrame(failed_rows).to_csv(FAILURES_PATH, index=False)
+    _write_dataframe(ENRICHMENTS_PATH, enriched_rows, ENRICHMENT_COLUMNS)
+    _write_dataframe(FAILURES_PATH, failed_rows, FAILURE_COLUMNS)
 
     run_summary = {
         "run_completed_at": datetime.now(timezone.utc).isoformat(),
@@ -85,6 +149,53 @@ def enrich_support_tickets() -> None:
         "prompt_version": prompt_version,
     }
     RUN_SUMMARY_PATH.write_text(json.dumps(run_summary, indent=2), encoding="utf-8")
+
+
+def replay_failed_enrichments(limit: int | None = None) -> dict[str, object]:
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    failures_df = _read_csv_or_empty(FAILURES_PATH, FAILURE_COLUMNS)
+    enrichments_df = _read_csv_or_empty(ENRICHMENTS_PATH, ENRICHMENT_COLUMNS)
+    failure_records = failures_df.to_dict(orient="records")
+    if limit is not None:
+        failure_records = failure_records[:limit]
+
+    prompt_version = os.environ.get("SUPPORT_INTEL_PROMPT_VERSION", "v1")
+    model_name = os.environ.get("OPENAI_MODEL", "gpt-4.1-mini")
+    replayed_successes: list[dict[str, object]] = []
+    remaining_failures: list[dict[str, object]] = []
+
+    replay_ticket_ids = {str(row["ticket_id"]) for row in failure_records}
+    untouched_failures = [
+        row for row in failures_df.to_dict(orient="records") if str(row["ticket_id"]) not in replay_ticket_ids
+    ]
+
+    for row in failure_records:
+        try:
+            replayed_successes.append(_build_success_row(row, prompt_version=prompt_version))
+        except TicketEnrichmentError as exc:
+            remaining_failures.append(_build_failure_row(row, exc, model_name=model_name, prompt_version=prompt_version))
+
+    existing_successes = enrichments_df.to_dict(orient="records")
+    successes_by_ticket_id = {str(row["ticket_id"]): row for row in existing_successes}
+    for row in replayed_successes:
+        successes_by_ticket_id[str(row["ticket_id"])] = row
+
+    final_successes = list(successes_by_ticket_id.values())
+    final_failures = untouched_failures + remaining_failures
+
+    _write_dataframe(ENRICHMENTS_PATH, final_successes, ENRICHMENT_COLUMNS)
+    _write_dataframe(FAILURES_PATH, final_failures, FAILURE_COLUMNS)
+
+    replay_summary = {
+        "replay_completed_at": datetime.now(timezone.utc).isoformat(),
+        "attempted_replays": int(len(failure_records)),
+        "replayed_success_count": int(len(replayed_successes)),
+        "remaining_failure_count": int(len(final_failures)),
+        "model_name": model_name,
+        "prompt_version": prompt_version,
+    }
+    REPLAY_SUMMARY_PATH.write_text(json.dumps(replay_summary, indent=2), encoding="utf-8")
+    return replay_summary
 
 
 def ensure_bigquery_dataset(project_id: str, dataset_name: str, location: str = "US") -> None:
