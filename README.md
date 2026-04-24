@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LLM-Driven Support Ticket Intelligence Pipeline
 
 This project is a portfolio-ready data pipeline that ingests support tickets, enriches unstructured messages into structured support signals, and models analytics-ready outputs for support trend analysis.
@@ -62,3 +63,6 @@ pip install "apache-airflow==2.10.0" --constraint "https://raw.githubusercontent
 ```
 
 - The next upgrade is to replace the simple fallback with strict JSON-schema LLM responses plus retry and dead-letter handling.
+=======
+# LLM-Driven-Support-Ticket-
+>>>>>>> 518620ac59ee2cc61e49ba203c4aaed773f16c66
