@@ -108,6 +108,32 @@ pip install -r requirements.txt
 pip install "apache-airflow==2.10.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.0/constraints-3.11.txt"
 ```
 
+## Airflow With Docker
+
+For a more realistic Airflow runtime on Windows, use Docker instead of the native CLI.
+
+1. Copy `.env.airflow.example` to `.env.airflow`
+2. Set your real GCP and optional Slack values
+3. Point `HOST_GCP_KEY_DIR` at the folder containing your service-account JSON
+4. Start Airflow:
+
+```powershell
+docker compose -f docker-compose.airflow.yml --env-file .env.airflow up --build
+```
+
+The Airflow UI will be available at [http://localhost:8080](http://localhost:8080).
+
+Default login from the example file:
+
+- username: `airflow`
+- password: `airflow`
+
+To stop the stack:
+
+```powershell
+docker compose -f docker-compose.airflow.yml down
+```
+
 ## Next Steps
 
 - add replay automation for failed rows

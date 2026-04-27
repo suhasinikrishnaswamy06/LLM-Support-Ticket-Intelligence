@@ -8,3 +8,6 @@ dbt_packages/
 .env
 .env.airflow
 data/processed/
+.airflow/
+airflow/dags/__pycache__/
+dbt_profiles/.user.yml

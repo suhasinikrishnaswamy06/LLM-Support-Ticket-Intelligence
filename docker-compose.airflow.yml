@@ -1,0 +1,112 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: support-intel-postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+
+  airflow-init:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    container_name: support-intel-airflow-init
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env.airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/project/airflow/dags
+      AIRFLOW_HOME: /opt/airflow
+      PYTHONPATH: /opt/project
+    user: "0:0"
+    working_dir: /opt/project
+    volumes:
+      - ./:/opt/project
+      - airflow-logs:/opt/airflow/logs
+      - ./dbt_profiles:/opt/airflow/dbt_profiles
+      - ${HOST_GCP_KEY_DIR}:/opt/airflow/keys
+    command: >
+      bash -c "airflow db migrate &&
+      airflow users create
+      --role Admin
+      --username $${_AIRFLOW_WWW_USER_USERNAME}
+      --password $${_AIRFLOW_WWW_USER_PASSWORD}
+      --firstname Airflow
+      --lastname Admin
+      --email admin@example.com || true"
+
+  airflow-webserver:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    container_name: support-intel-airflow-webserver
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    env_file:
+      - .env.airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/project/airflow/dags
+      AIRFLOW_HOME: /opt/airflow
+      PYTHONPATH: /opt/project
+    working_dir: /opt/project
+    volumes:
+      - ./:/opt/project
+      - airflow-logs:/opt/airflow/logs
+      - ./dbt_profiles:/opt/airflow/dbt_profiles
+      - ${HOST_GCP_KEY_DIR}:/opt/airflow/keys
+    ports:
+      - "8080:8080"
+    command: webserver
+    restart: unless-stopped
+
+  airflow-scheduler:
+    build:
+      context: .
+      dockerfile: docker/airflow/Dockerfile
+    container_name: support-intel-airflow-scheduler
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    env_file:
+      - .env.airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/project/airflow/dags
+      AIRFLOW_HOME: /opt/airflow
+      PYTHONPATH: /opt/project
+    working_dir: /opt/project
+    volumes:
+      - ./:/opt/project
+      - airflow-logs:/opt/airflow/logs
+      - ./dbt_profiles:/opt/airflow/dbt_profiles
+      - ${HOST_GCP_KEY_DIR}:/opt/airflow/keys
+    command: scheduler
+    restart: unless-stopped
+
+volumes:
+  postgres-db-volume:
+  airflow-logs:
