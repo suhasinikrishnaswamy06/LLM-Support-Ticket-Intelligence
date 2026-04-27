@@ -35,7 +35,7 @@ with DAG(
     catchup=False,
     tags=["portfolio", "llm", "support"],
 ) as dag:
-    generate_data = PythonOperator(task_id="generate_support_tickets", python_callable=generate_source_data)
+    generate_data = PythonOperator(task_id="ingest_support_tickets", python_callable=generate_source_data)
     validate_files = PythonOperator(task_id="validate_raw_files", python_callable=validate_raw_files)
     enrich_tickets = PythonOperator(task_id="enrich_support_tickets", python_callable=enrich_support_tickets)
     ensure_dataset = PythonOperator(

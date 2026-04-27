@@ -13,6 +13,7 @@ from pandas.errors import EmptyDataError
 from google.cloud import bigquery
 
 from src.enrichment.ticket_enricher import TicketEnrichmentError, enrichment_to_dict
+from src.ingestion.slack_ingestion import SlackIngestionError, ingest_slack_support_tickets_from_env
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -60,6 +61,22 @@ FAILURE_COLUMNS = [
 
 
 def generate_source_data() -> None:
+    source_mode = os.environ.get("SUPPORT_INTEL_SOURCE_MODE", "auto").strip().lower()
+    slack_is_configured = bool(os.environ.get("SLACK_BOT_TOKEN")) and bool(os.environ.get("SLACK_CHANNEL_IDS"))
+
+    if source_mode == "slack":
+        output_path = ingest_slack_support_tickets_from_env()
+        print(f"Wrote {output_path} from Slack API")
+        return
+
+    if source_mode == "auto" and slack_is_configured:
+        try:
+            output_path = ingest_slack_support_tickets_from_env()
+            print(f"Wrote {output_path} from Slack API")
+            return
+        except SlackIngestionError as exc:
+            print(f"Slack ingestion failed, falling back to mock data: {exc}")
+
     subprocess.run([sys.executable, "-m", "src.data.generate_sample_tickets"], cwd=PROJECT_ROOT, check=True)
 
 

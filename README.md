@@ -13,6 +13,7 @@ This project is a portfolio-ready data pipeline that ingests support tickets, en
 ## MVP Scope
 
 - generate mock Slack-style support tickets
+- optionally ingest real support messages from Slack channels
 - enrich ticket text with issue category, sentiment, urgency, product area, summary, and confidence
 - persist raw and enriched records for warehouse loading
 - capture failed enrichments for auditability and replay
@@ -33,7 +34,7 @@ This project is a portfolio-ready data pipeline that ingests support tickets, en
 
 1. Create a Python 3.11 virtual environment
 2. Copy `.env.example` to `.env` and fill in your BigQuery and OpenAI settings
-3. Generate mock tickets:
+3. Generate or ingest tickets:
 
 ```powershell
 python -m src.data.generate_sample_tickets
@@ -49,6 +50,27 @@ python -c "from src.orchestration.pipeline import enrich_support_tickets; enrich
 
 ```powershell
 dbt build --project-dir dbt/support_intelligence --profiles-dir dbt_profiles
+```
+
+## Slack Ingestion
+
+The pipeline supports three source modes through `SUPPORT_INTEL_SOURCE_MODE`:
+
+- `mock`: always generate synthetic support tickets
+- `slack`: require Slack API ingestion
+- `auto`: try Slack first, then fall back to mock data if credentials are missing or ingestion fails
+
+To use Slack ingestion, set these environment variables:
+
+- `SLACK_BOT_TOKEN`
+- `SLACK_CHANNEL_IDS` as a comma-separated list like `C12345678,C87654321`
+- optional `SLACK_LOOKBACK_DAYS`
+- optional `SLACK_MAX_MESSAGES_PER_CHANNEL`
+
+Then run the normal pipeline entry point:
+
+```powershell
+python -c "from src.orchestration.pipeline import generate_source_data; generate_source_data()"
 ```
 
 ## Reliability Features
