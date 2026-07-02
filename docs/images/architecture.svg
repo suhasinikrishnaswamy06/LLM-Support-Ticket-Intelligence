@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">LLM Support Ticket Intelligence Architecture</title>
+  <desc id="desc">Architecture diagram showing Slack or mock support tickets flowing through Airflow, Python enrichment, BigQuery raw tables, dbt models, and analytics marts.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef6ff"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#334155"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 34px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 17px; fill: #475569; }
+      .box-title { font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 700; fill: #0f172a; }
+      .box-text { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #475569; }
+      .lane { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .08em; fill: #64748b; }
+      .note { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #64748b; }
+      .box { rx: 12; filter: url(#shadow); stroke-width: 1.2; }
+      .arrow { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .soft-arrow { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 7; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="64" y="72" class="title">LLM Support Ticket Intelligence Pipeline</text>
+  <text x="64" y="104" class="subtitle">From unstructured support conversations to governed, analytics-ready support signals.</text>
+
+  <text x="64" y="160" class="lane">SOURCES</text>
+  <text x="338" y="160" class="lane">ORCHESTRATION</text>
+  <text x="616" y="160" class="lane">ENRICHMENT</text>
+  <text x="894" y="160" class="lane">WAREHOUSE AND MARTS</text>
+
+  <rect x="64" y="190" width="210" height="118" class="box" fill="#ffffff" stroke="#bae6fd"/>
+  <text x="88" y="226" class="box-title">Slack Messages</text>
+  <text x="88" y="254" class="box-text">Optional real channel ingest</text>
+  <text x="88" y="278" class="box-text">support threads and metadata</text>
+
+  <rect x="64" y="360" width="210" height="118" class="box" fill="#ffffff" stroke="#bbf7d0"/>
+  <text x="88" y="396" class="box-title">Mock Tickets</text>
+  <text x="88" y="424" class="box-text">Portable demo data</text>
+  <text x="88" y="448" class="box-text">expected labels for QA</text>
+
+  <rect x="338" y="275" width="210" height="118" class="box" fill="#ffffff" stroke="#c7d2fe"/>
+  <text x="362" y="311" class="box-title">Airflow DAG</text>
+  <text x="362" y="339" class="box-text">Generate or ingest tickets</text>
+  <text x="362" y="363" class="box-text">run enrichment, load raw data</text>
+
+  <rect x="616" y="190" width="210" height="118" class="box" fill="#ffffff" stroke="#fecdd3"/>
+  <text x="640" y="226" class="box-title">LLM Enrichment</text>
+  <text x="640" y="254" class="box-text">category, sentiment, urgency</text>
+  <text x="640" y="278" class="box-text">product area, summary, confidence</text>
+
+  <rect x="616" y="360" width="210" height="118" class="box" fill="#ffffff" stroke="#fde68a"/>
+  <text x="640" y="396" class="box-title">Reliability Layer</text>
+  <text x="640" y="424" class="box-text">validation, retries, failures</text>
+  <text x="640" y="448" class="box-text">replay and run summaries</text>
+
+  <rect x="894" y="190" width="210" height="118" class="box" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="918" y="226" class="box-title">BigQuery Raw</text>
+  <text x="918" y="254" class="box-text">support_tickets</text>
+  <text x="918" y="278" class="box-text">ticket_enrichments, failures</text>
+
+  <rect x="894" y="360" width="210" height="118" class="box" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="918" y="396" class="box-title">dbt Models</text>
+  <text x="918" y="424" class="box-text">staging, fact tables</text>
+  <text x="918" y="448" class="box-text">trend and failure marts</text>
+
+  <rect x="1012" y="545" width="204" height="96" class="box" fill="#ffffff" stroke="#99f6e4"/>
+  <text x="1036" y="580" class="box-title">Analytics</text>
+  <text x="1036" y="608" class="box-text">support trends, quality</text>
+  <text x="1036" y="632" class="box-text">ops reporting and review</text>
+
+  <path class="arrow" d="M274 249 C300 249, 310 305, 338 320"/>
+  <path class="arrow" d="M274 419 C302 419, 312 364, 338 349"/>
+  <path class="arrow" d="M548 334 C580 334, 586 249, 616 249"/>
+  <path class="arrow" d="M721 308 L721 360"/>
+  <path class="arrow" d="M826 249 L894 249"/>
+  <path class="arrow" d="M999 308 L999 360"/>
+  <path class="arrow" d="M1003 478 C1015 510, 1060 518, 1094 545"/>
+  <path class="soft-arrow" d="M826 419 C856 419, 862 419, 894 419"/>
+
+  <rect x="64" y="565" width="710" height="76" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="88" y="596" class="box-title">Portfolio Signals</text>
+  <text x="88" y="624" class="note">Orchestration, structured LLM output, failure handling, replayability, warehouse modeling, and analytics-ready marts.</text>
+</svg>

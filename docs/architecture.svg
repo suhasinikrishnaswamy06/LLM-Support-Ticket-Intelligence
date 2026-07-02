@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="240" viewBox="0 0 900 240">
+  <style>
+    .box{fill:#f6f9fc;stroke:#2b6cb0;stroke-width:2;rx:8}
+    .text{font-family:Arial, Helvetica, sans-serif;font-size:14px;fill:#1a202c}
+    .arrow{stroke:#2b6cb0;stroke-width:2;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2b6cb0" />
+    </marker>
+  </defs>
+
+  <rect x="20" y="40" width="140" height="60" class="box" />
+  <text x="90" y="75" class="text" text-anchor="middle">Sources
+    <tspan x="90" dy="18" font-size="12">(Slack / Mock)</tspan>
+  </text>
+
+  <rect x="200" y="40" width="160" height="60" class="box" />
+  <text x="280" y="75" class="text" text-anchor="middle">Ingest
+    <tspan x="280" dy="18" font-size="12">(ingestion layer)</tspan>
+  </text>
+
+  <rect x="420" y="25" width="220" height="90" class="box" />
+  <text x="530" y="60" class="text" text-anchor="middle">Enrichment
+    <tspan x="530" dy="18" font-size="12">(LLM + retry / fallback)</tspan>
+  </text>
+
+  <rect x="660" y="10" width="200" height="60" class="box" />
+  <text x="760" y="40" class="text" text-anchor="middle">Processed
+    <tspan x="760" dy="18" font-size="12">CSV / JSON</tspan>
+  </text>
+
+  <rect x="660" y="120" width="200" height="60" class="box" />
+  <text x="760" y="150" class="text" text-anchor="middle">Failures
+    <tspan x="760" dy="18" font-size="12">CSV -> Replay Utility</tspan>
+  </text>
+
+  <rect x="420" y="140" width="220" height="60" class="box" />
+  <text x="530" y="175" class="text" text-anchor="middle">dbt
+    <tspan x="530" dy="18" font-size="12">Staging → Marts</tspan>
+  </text>
+
+  <line x1="160" y1="70" x2="200" y2="70" class="arrow" />
+  <line x1="360" y1="70" x2="420" y2="70" class="arrow" />
+  <line x1="640" y1="70" x2="660" y2="40" class="arrow" />
+  <line x1="640" y1="70" x2="660" y2="150" class="arrow" />
+  <line x1="530" y1="110" x2="530" y2="140" class="arrow" />
+
+</svg>

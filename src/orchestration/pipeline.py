@@ -10,7 +10,6 @@ import sys
 
 import pandas as pd
 from pandas.errors import EmptyDataError
-from google.cloud import bigquery
 
 from src.enrichment.ticket_enricher import TicketEnrichmentError, enrichment_to_dict
 from src.ingestion.slack_ingestion import SlackIngestionError, ingest_slack_support_tickets_from_env
@@ -216,6 +215,8 @@ def replay_failed_enrichments(limit: int | None = None) -> dict[str, object]:
 
 
 def ensure_bigquery_dataset(project_id: str, dataset_name: str, location: str = "US") -> None:
+    from google.cloud import bigquery
+
     client = bigquery.Client(project=project_id)
     dataset_id = f"{project_id}.{dataset_name}"
     dataset = bigquery.Dataset(dataset_id)
@@ -230,6 +231,8 @@ def load_csv_to_bigquery(
     csv_path: Path,
     location: str = "US",
 ) -> None:
+    from google.cloud import bigquery
+
     client = bigquery.Client(project=project_id)
     table_id = f"{project_id}.{dataset_name}.{table_name}"
     job_config = bigquery.LoadJobConfig(

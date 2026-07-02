@@ -14,6 +14,8 @@ This project includes a Docker-based Airflow runtime for Windows-friendly verifi
 2. Set a real GCP project id and service-account key path
 3. Optionally set Slack credentials if you want live Slack ingestion
 
+The Docker image starts from the official Airflow image and installs `requirements-cloud.txt` for BigQuery, dbt, and OpenAI support. Native Airflow installs should use `requirements-airflow.txt` with the official Airflow constraints file.
+
 ## Run
 
 ```powershell

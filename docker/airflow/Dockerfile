@@ -8,5 +8,5 @@ RUN apt-get update \
 
 USER airflow
 COPY requirements.txt /tmp/requirements.txt
-COPY requirements-airflow.txt /tmp/requirements-airflow.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+COPY requirements-cloud.txt /tmp/requirements-cloud.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-cloud.txt

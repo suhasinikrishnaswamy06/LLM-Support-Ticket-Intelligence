@@ -1,0 +1,7 @@
+-r requirements.txt
+
+packaging>=21,<25
+google-cloud-bigquery==3.30.0
+dbt-core==1.8.7
+dbt-bigquery==1.8.2
+openai==1.76.0
