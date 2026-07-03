@@ -31,8 +31,10 @@ jobs:
 
       - name: Run smoke check
         run: |
-          python scripts/ci_smoke.py
+          python -m scripts.ci_smoke
 
       - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest --basetemp .pytest-tmp
+          python -m pytest -vv --tb=short --basetemp .pytest-tmp
